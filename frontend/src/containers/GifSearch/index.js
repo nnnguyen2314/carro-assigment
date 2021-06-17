@@ -1,12 +1,12 @@
 import React, {useContext, useState} from 'react';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import GifListList from "../../components/Gifts/GifList";
+import { GifList } from "../../components/Gifs";
 import Grid from "@material-ui/core/Grid";
 import styles from "./styles";
 import {AppContext} from "../../app/contexts";
 import * as gifService from "../../services/gifs";
-import {remove_gif_from_favourite, save_gif_to_favourite, save_search_options, search_failure} from "../../app/actions";
+import {save_gif_to_favourite, save_search_options, search_failure} from "../../app/actions";
 import CustomCircularProgress from "../../components/Shared/CustomCircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -27,8 +27,13 @@ const GifSearch = () => {
         gifService.doSearch(value, lang, limit, offset)
             .then((res) => {
                 if (!res.isError) {
+                    let results = res.data.data;
+                    results.forEach((item) => {
+                        const idx = state.favourites.findIndex((fi) => item.id === fi.id);
+                        item['isSaved'] = (idx >= 0);
+                    });
                     let currentResults = searchResults;
-                    currentResults.push(...res.data.data);
+                    currentResults.push(...results);
                     setSearchResults(currentResults);
 
                     const currentPageNo = (res.data.pagination.offset / res.data.pagination.count) + 1;
@@ -56,15 +61,7 @@ const GifSearch = () => {
     };
 
     const handleSaveToFavourite = (gifItem) => {
-        console.log(gifItem);
-        const favourites = state.favourites;
-        const existingIndex = favourites.findIndex((item) => item.id === gifItem.id);
-
-        if (existingIndex >= 0) {
-            gifItem['isSaved'] = false;
-            favourites.slice(existingIndex, 1);
-            dispatch(remove_gif_from_favourite(gifItem));
-        } else {
+        if (!gifItem['isSaved']) {
             gifItem['isSaved'] = true;
             dispatch(save_gif_to_favourite(gifItem));
         }
@@ -77,6 +74,7 @@ const GifSearch = () => {
     };
 
     const handleSearch = (evt) => {
+        setSearchResults([]);
         const limit = state.search_options.default_search_page_size;
         doSearch(inputValues['keyword'], 'en', limit, 0);
     };
@@ -114,7 +112,7 @@ const GifSearch = () => {
                                     About {totalResults} results
                                 </Typography>
                             </div>
-                            <GifListList id="list" gifList={searchResults} handleClickItem={handleSaveToFavourite}/>
+                            <GifList id="list" gifList={searchResults} handleClickItem={handleSaveToFavourite}/>
                             <div style={{display: 'flex', justifyContent: "center", alignItems: "center"}}>
                                 {
                                     !loading && (

@@ -26,7 +26,6 @@ const GifListItem = ({gif, handleClick}) => {
                             edge="start"
                             size="small"
                             title="Liked"
-                            color='primary'
                         >
                             <FavoriteIcon color='primary' title="Favourite Gif Images"/>
                         </IconButton>

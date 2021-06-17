@@ -56,7 +56,7 @@ export default function appReducer (state, action) {
             let favouritesCount = localStorage.getItem('favourites_count');
             return {
                 ...state,
-                favourites_count: favouritesCount ? Number(favourites) : initialState.favourites_count,
+                favourites_count: favouritesCount ? Number(favouritesCount) : initialState.favourites_count,
             };
         default:
             return state;

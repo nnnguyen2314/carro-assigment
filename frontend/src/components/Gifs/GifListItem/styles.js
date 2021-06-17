@@ -5,11 +5,15 @@ const styles = makeStyles((theme) =>
         muiFiCard: {
             width: '100%',
             minHeight: 180,
-            '-webkit-transition': '1s', /* Safari */
+            '-webkit-transition': '1s',
             transition: '1s',
             boxShadow: `0 0 5pt 0.5pt ${theme.palette.common.lightGrey}`,
             '&:hover': {
                 boxShadow: `0 0 5pt 2pt ${theme.palette.common.grey}`,
+                cursor: 'pointer',
+                '.MuiSvgIcon-colorPrimary': {
+                    color: theme.palette.primary.light
+                }
             }
         },
         muiFiCardContent: {

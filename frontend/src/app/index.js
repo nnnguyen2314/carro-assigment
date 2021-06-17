@@ -9,6 +9,7 @@ import {AppProvider} from "./contexts";
 import Footer from "../components/Footer";
 import GifSearch from "../containers/GifSearch";
 import Grid from "@material-ui/core/Grid";
+import FavouriteGifs from "../containers/Favourites";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                                             <GifSearch />
                                         </Route>
                                         <Route path="/favourites">
+                                            <FavouriteGifs />
                                         </Route>
                                     </Switch>
                                 </Grid>

@@ -3,7 +3,7 @@ import GifListItem from "../GifListItem";
 import Box from "@material-ui/core/Box";
 import styles from "./styles";
 
-const GifListList = ({gifList, handleClickItem}) => {
+const GifList = ({gifList, handleClickItem}) => {
     const classes = styles();
 
     return (
@@ -21,4 +21,4 @@ const GifListList = ({gifList, handleClickItem}) => {
     )
 };
 
-export default GifListList;
+export default GifList;
