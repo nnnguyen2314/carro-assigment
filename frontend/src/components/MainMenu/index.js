@@ -27,7 +27,7 @@ const MainMenu = () => {
             >
                 <FavoriteIcon title="Favourite Gif Images"/>
                 <Typography variant="body1">
-                    Saved ({state.favourites_count || 0})
+                    Saved ({state.favourites.length || 0})
                 </Typography>
             </Button>
         </nav>

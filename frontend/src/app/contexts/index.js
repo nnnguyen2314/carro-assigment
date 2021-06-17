@@ -12,7 +12,7 @@ export const AppProvider = ({children}) => {
 
     useEffect(() => {
         dispatch(ACTIONS.restore_search_options());
-        dispatch(ACTIONS.fetch_favourite_gif_list_count());
+        dispatch(ACTIONS.fetch_favourite_gif_list());
     }, []);
 
     return (

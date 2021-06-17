@@ -42,9 +42,4 @@ export const remove_gif_from_favourite = (gif) => {
         payload: gif,
     }
 };
-export const fetch_favourite_gif_list_count = () => {
-    return {
-        type: ACTION_TYPES.FETCH_FAVOURITE_GIF_LIST_COUNT,
-    }
-};
 

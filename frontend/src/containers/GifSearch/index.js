@@ -22,17 +22,19 @@ const GifSearch = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [state, dispatch] = useContext(AppContext);
 
-    const doSearch = (value, lang, limit, offset) => {
+    const doSearch = (isLoadMore, value, lang, limit, offset) => {
         setLoading(true);
         gifService.doSearch(value, lang, limit, offset)
             .then((res) => {
                 if (!res.isError) {
                     let results = res.data.data;
                     results.forEach((item) => {
-                        const idx = state.favourites.findIndex((fi) => item.id === fi.id);
+                        const idx = state.favourites.findIndex((fi) => {
+                            return fi.id === item.id;
+                        });
                         item['isSaved'] = (idx >= 0);
                     });
-                    let currentResults = searchResults;
+                    let currentResults = isLoadMore ? searchResults : [];
                     currentResults.push(...results);
                     setSearchResults(currentResults);
 
@@ -70,13 +72,12 @@ const GifSearch = () => {
     const handleLoadMore = () => {
         const limit = state.search_options.default_search_page_size;
         const offset = (advancedPageNo - 1) * limit;
-        doSearch(inputValues['keyword'], 'en', limit, offset);
+        doSearch(true, inputValues['keyword'], 'en', limit, offset);
     };
 
     const handleSearch = (evt) => {
-        setSearchResults([]);
         const limit = state.search_options.default_search_page_size;
-        doSearch(inputValues['keyword'], 'en', limit, 0);
+        doSearch(false, inputValues['keyword'], 'en', limit, 0);
     };
 
     return (

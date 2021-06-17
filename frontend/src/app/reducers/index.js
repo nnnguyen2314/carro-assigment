@@ -6,7 +6,6 @@ export const initialState = {
         default_search_page_size: 0,
     },
     favourites: [],
-    favourites_count: 0,
 };
 
 export default function appReducer (state, action) {
@@ -35,28 +34,18 @@ export default function appReducer (state, action) {
             let currentFavourites = state.favourites;
             currentFavourites.push(action.payload);
             localStorage.setItem('favourites', JSON.stringify(currentFavourites));
-            localStorage.setItem('favourites_count', currentFavourites.length.toString());
             return {
                 ...state,
                 favourites: currentFavourites,
-                favourites_count: currentFavourites.length,
             };
         case ACTION_TYPES.REMOVE_GIF_FROM_FAVOURITES:
             let newFavourites = state.favourites.filter((item) => {
                 return item.id !== action.payload.id;
             });
             localStorage.setItem('favourites', JSON.stringify(newFavourites));
-            localStorage.setItem('favourites_count', newFavourites.length.toString());
             return {
                 ...state,
                 favourites: newFavourites,
-                favourites_count: newFavourites.length,
-            };
-        case ACTION_TYPES.FETCH_FAVOURITE_GIF_LIST_COUNT:
-            let favouritesCount = localStorage.getItem('favourites_count');
-            return {
-                ...state,
-                favourites_count: favouritesCount ? Number(favouritesCount) : initialState.favourites_count,
             };
         default:
             return state;

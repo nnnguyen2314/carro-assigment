@@ -11,7 +11,7 @@ const GifList = ({gifList, handleClickItem}) => {
             {
                 gifList.length > 0 && gifList.map((gif) => (
                     <Box p={1} key={gif.id} className={classes.listItem}>
-                        <GifListItem gif={gif} isSaved={false} handleClick={() => {
+                        <GifListItem id={gif.id} gif={gif} isSaved={false} handleClick={() => {
                             handleClickItem(gif);
                         }} />
                     </Box>
