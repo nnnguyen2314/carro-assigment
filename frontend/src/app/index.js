@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import {MuiThemeProvider, CssBaseline, Toolbar, AppBar} from '@material-ui/core';
 import theme from '../themes';
@@ -7,6 +7,8 @@ import './App.css';
 import MainMenu from "../components/MainMenu";
 import {AppProvider} from "./contexts";
 import Footer from "../components/Footer";
+import GifSearch from "../containers/GifSearch";
+import Grid from "@material-ui/core/Grid";
 
 function App() {
     return (
@@ -22,13 +24,18 @@ function App() {
                                 </Header>
                             </Toolbar>
                         </AppBar>
-                        <main className="App-content">
-                            <Switch>
-                                <Route exact path="/">
-                                </Route>
-                                <Route path="/favourites">
-                                </Route>
-                            </Switch>
+                        <main className="App-main">
+                            <Grid container>
+                                <Grid item md={10} sm={12} xs={12} style={{margin: '10px auto'}} className="App-main-content">
+                                    <Switch>
+                                        <Route exact path="/">
+                                            <GifSearch />
+                                        </Route>
+                                        <Route path="/favourites">
+                                        </Route>
+                                    </Switch>
+                                </Grid>
+                            </Grid>
                         </main>
                         <footer className="App-footer">
                             <Footer />

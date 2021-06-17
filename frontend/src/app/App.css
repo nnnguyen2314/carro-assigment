@@ -1,21 +1,23 @@
 .App {
   flex-grow: 1;
+  height: 100%;
 }
 
 .App-header {
   flex-grow: 1;
 }
 
-.App-content {
-  margin: 10px 0;
+.App-main {
+  min-height: calc(100vh - 122px);
+}
+.App-main-content {
+  margin: 0 auto;
 }
 
 .App-footer {
-  position: fixed;
-  bottom: 0;
   height: 50px;
   width: 100%;
-  box-shadow: 0px 2px 4px -1px;
+  box-shadow: 0 0 5pt 2pt #D3D3D3;
   display: inline-flex;
   align-items: center;
 }

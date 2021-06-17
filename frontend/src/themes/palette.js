@@ -20,11 +20,15 @@ const palette = {
         },
         tonalOffset: 0.2,
         background: {
-            default: '#f5f5f5'
+            default: '#f5f5f5',
+            white: '#ffffff',
         },
         common: {
             black: '#343a40',
-            darkBlack: 'rgb(36, 40, 44)'
+            darkBlack: 'rgb(36, 40, 44)',
+            white: '#ffffff',
+            lightGrey: '#d3d3d3',
+            grey: colors.grey[500],
         },
         spacing: 8,
         breakpoints: {
@@ -38,7 +42,7 @@ const palette = {
         },
         border: {
             borderColor: 'rgba(0, 0, 0, 0.13)',
-            borderWidth: 2
+            borderWidth: 2,
         },
         typography: {
             useNextVariants: true

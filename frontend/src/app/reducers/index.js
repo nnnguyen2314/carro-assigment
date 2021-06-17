@@ -16,7 +16,7 @@ export default function appReducer (state, action) {
             return {
                 ...state,
                 error: null,
-                search_options: searchOptions ? JSON.parse(searchOptions) : initialState.search_options,
+                search_options: searchOptions ? {...state.search_options, ...JSON.parse(searchOptions)} : initialState.search_options,
             };
         case ACTION_TYPES.SAVE_SEARCH_OPTIONS:
             localStorage.setItem('search_options', JSON.stringify(action.payload));

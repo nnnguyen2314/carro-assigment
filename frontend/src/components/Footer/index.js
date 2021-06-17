@@ -13,6 +13,7 @@ const Footer = ({children}) => {
                     <Typography variant='body1'>
                         ABC LTD. @2021
                     </Typography>
+                    {children}
                 </div>
             </Grid>
         </Grid>
