@@ -11,7 +11,7 @@ const styles = makeStyles((theme) =>
             '&:hover': {
                 boxShadow: `0 0 5pt 2pt ${theme.palette.common.grey}`,
                 cursor: 'pointer',
-                '.MuiSvgIcon-colorPrimary': {
+                '& .MuiSvgIcon-colorPrimary': {
                     color: theme.palette.primary.light
                 }
             }
@@ -26,6 +26,16 @@ const styles = makeStyles((theme) =>
             width: '100%',
             display: 'inline-flex',
             justifyContent: 'flex-end',
+        },
+        muiFiCardButtonIcon: {
+            width: '1.2em',
+            height: '1.2em',
+        },
+        deleteIcon: {
+            color: theme.palette.common.lightGrey,
+        },
+        favouriteIcon: {
+            color: theme.palette.primary.main
         }
     })
 );

@@ -9,11 +9,11 @@ const styles = makeStyles((theme) =>
         },
         search: {
             position: 'relative',
-            marginRight: theme.spacing(2),
-            marginLeft: 0,
+            marginLeft: 'auto',
+            marginRight: 'auto',
             width: '100%',
             backgroundColor: fade(theme.palette.common.white, 0.7),
-            borderRadius: theme.shape.borderRadius,
+            borderRadius: 25,
             border: `1px solid ${theme.palette.common.lightGrey}`,
             '-webkit-transition': '1s', /* Safari */
             transition: '1s',
@@ -26,8 +26,7 @@ const styles = makeStyles((theme) =>
                 backgroundColor: theme.palette.common.white,
             },
             [theme.breakpoints.up('sm')]: {
-                marginLeft: theme.spacing(3),
-                width: 'auto',
+                width: '80%',
             },
         },
         searchIcon: {

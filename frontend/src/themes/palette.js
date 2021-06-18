@@ -5,12 +5,12 @@ const palette = {
         type: 'light',
         primary: {
             main: colors.pink[500], //'#e91e63',
-            light: colors.pink[400],
+            light: colors.pink[200],
             dark: colors.pink[800],
         },
         secondary: {
             main: colors.indigo[500],//'#3f51b5',
-            light: colors.indigo[400],
+            light: colors.indigo[200],
             dark: colors.indigo[800],
         },
         warning: {
@@ -29,6 +29,8 @@ const palette = {
             white: '#ffffff',
             lightGrey: '#d3d3d3',
             grey: colors.grey[500],
+            orange: colors.orange[500],
+            lightOrange: colors.orange[200],
         },
         spacing: 8,
         breakpoints: {

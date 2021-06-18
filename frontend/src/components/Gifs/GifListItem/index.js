@@ -7,12 +7,19 @@ import {
 } from '../../Shared/MuiFullImageCard';
 import styles from "./styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import DeleteIcon from '@material-ui/icons/Delete';
+import Box from "@material-ui/core/Box";
+import classNames from "classnames";
 
 const GifListItem = ({gif, handleClick}) => {
     const classes = styles();
 
     return (
-        <MuiFullImageCard className={classes.muiFiCard} onClick={handleClick}>
+        <MuiFullImageCard className={classes.muiFiCard} onClick={(evt) => {
+            if(handleClick && typeof handleClick === 'function') {
+                handleClick(evt );
+            }
+        }}>
             <MuiFullImageCardMedia
                 media="picture"
                 alt="Contemplative Reptile"
@@ -22,13 +29,7 @@ const GifListItem = ({gif, handleClick}) => {
             {
                 gif.isSaved && (
                     <MuiFullImageCardActions className={classes.muiFiCardActions}>
-                        <IconButton
-                            edge="start"
-                            size="small"
-                            title="Liked"
-                        >
-                            <FavoriteIcon color='primary' title="Favourite Gif Images"/>
-                        </IconButton>
+                        <FavoriteIcon color="primary" className={classNames(classes.muiFiCardButtonIcon, classes.favouriteIcon)} title="Favourite Gif Images"/>
                     </MuiFullImageCardActions>
                 )
             }
