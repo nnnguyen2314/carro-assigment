@@ -6,10 +6,11 @@ import Grid from "@material-ui/core/Grid";
 import styles from "./styles";
 import {AppContext} from "../../app/contexts";
 import * as gifService from "../../services/gifs";
-import {save_gif_to_favourite, save_search_options, search_failure} from "../../app/actions";
+import {remove_gif_from_favourite, save_gif_to_favourite, save_search_options, search_failure} from "../../app/actions";
 import CustomCircularProgress from "../../components/Shared/CustomCircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import ConfirmationDialog from "../../components/ConfirmationDialog";
 
 const GifSearch = () => {
     const classes = styles();
@@ -69,6 +70,11 @@ const GifSearch = () => {
         }
     };
 
+    const handleRemoveFromFavourites = (gifItem) => {
+        gifItem['isSaved'] = false;
+        dispatch(remove_gif_from_favourite(gifItem));
+    };
+
     const handleLoadMore = () => {
         const limit = state.search_options.default_search_page_size;
         const offset = (advancedPageNo - 1) * limit;
@@ -81,58 +87,61 @@ const GifSearch = () => {
     };
 
     return (
-        <Grid container className={classes.root} spacing={2}>
-            <Grid item md={12}>
-                <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon />
-                    </div>
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        name="keyword"
-                        inputProps={{ 'aria-label': 'search' }}
-                        onChange={handleChange}
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                                handleSearch(e);
-                            }
-                        }}
-                    />
-                </div>
-            </Grid>
-            <Grid item md={12}>
-                {
-                    (searchResults.length > 0) && (
-                        <>
-                            <div style={{display: 'flex', justifyContent: "flex-start", alignItems: "center"}}>
-                                <Typography variant="h6">
-                                    About {totalResults} results
-                                </Typography>
-                            </div>
-                            <GifList id="list" gifList={searchResults} handleClickItem={handleSaveToFavourite}/>
-                            <div style={{display: 'flex', justifyContent: "center", alignItems: "center"}}>
-                                {
-                                    !loading && (
-                                        <Button onClick={handleLoadMore} color="secondary">Load More</Button>
-                                    )
-                                }
-                            </div>
-                        </>
-                    )
-                }
-                {
-                    loading && (
-                        <div style={{display: 'flex', justifyContent: "center", alignItems: "center"}}>
-                            <CustomCircularProgress />
+        <>
+            <Grid container className={classes.root} spacing={2}>
+                <Grid item md={12}>
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
                         </div>
-                    )
-                }
+                        <InputBase
+                            placeholder="Search…"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            name="keyword"
+                            inputProps={{ 'aria-label': 'search' }}
+                            onChange={handleChange}
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleSearch(e);
+                                }
+                            }}
+                            autoFocus
+                        />
+                    </div>
+                </Grid>
+                <Grid item md={12}>
+                    {
+                        (searchResults.length > 0) && (
+                            <>
+                                <div style={{display: 'flex', justifyContent: "flex-start", alignItems: "center"}}>
+                                    <Typography variant="h6">
+                                        About {totalResults} results
+                                    </Typography>
+                                </div>
+                                <GifList id="list" gifList={searchResults} handleRemoveItem={handleRemoveFromFavourites} handleClickItem={handleSaveToFavourite}/>
+                                <div style={{display: 'flex', justifyContent: "center", alignItems: "center"}}>
+                                    {
+                                        !loading && (
+                                            <Button onClick={handleLoadMore} color="secondary">Load More</Button>
+                                        )
+                                    }
+                                </div>
+                            </>
+                        )
+                    }
+                    {
+                        loading && (
+                            <div style={{display: 'flex', justifyContent: "center", alignItems: "center"}}>
+                                <CustomCircularProgress />
+                            </div>
+                        )
+                    }
+                </Grid>
             </Grid>
-        </Grid>
+        </>
     );
 };
 

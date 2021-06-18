@@ -4,16 +4,13 @@ const styles = makeStyles((theme) =>
     createStyles({
         muiFiCard: {
             width: '100%',
-            minHeight: 180,
+            minHeight: 190,
             '-webkit-transition': '1s',
             transition: '1s',
             boxShadow: `0 0 5pt 0.5pt ${theme.palette.common.lightGrey}`,
             '&:hover': {
                 boxShadow: `0 0 5pt 2pt ${theme.palette.common.grey}`,
                 cursor: 'pointer',
-                '& .MuiSvgIcon-colorPrimary': {
-                    color: theme.palette.primary.light
-                }
             }
         },
         muiFiCardContent: {
@@ -22,7 +19,7 @@ const styles = makeStyles((theme) =>
         },
         muiFiCardActions: {
             color: "#ffffff",
-            backgroundColor: "rgba(0,0,0,.24)",
+            backgroundColor: "rgba(0,0,0,.40)",
             width: '100%',
             display: 'inline-flex',
             justifyContent: 'flex-end',
@@ -35,7 +32,10 @@ const styles = makeStyles((theme) =>
             color: theme.palette.common.lightGrey,
         },
         favouriteIcon: {
-            color: theme.palette.primary.main
+            color: theme.palette.primary.main,
+        },
+        favouriteHoverIcon: {
+            color: theme.palette.primary.light,
         }
     })
 );

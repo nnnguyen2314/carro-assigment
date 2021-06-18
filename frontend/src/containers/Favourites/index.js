@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import styles from "./styles";
 import {AppContext} from "../../app/contexts";
 import {
-    fetch_favourite_gif_list,
+    fetch_favourite_gif_list, remove_gif_from_favourite,
 } from "../../app/actions";
 import CustomCircularProgress from "../../components/Shared/CustomCircularProgress";
 import Typography from "@material-ui/core/Typography";
@@ -21,6 +21,11 @@ const FavouriteGifs = () => {
         setLoading(false);
     }, []);
 
+    const handleRemoveFromFavourites = (gifItem) => {
+        gifItem['isSaved'] = false;
+        dispatch(remove_gif_from_favourite(gifItem));
+    };
+
     return (
         <Grid container className={classes.root} spacing={2}>
             <Grid item md={12}>
@@ -29,10 +34,10 @@ const FavouriteGifs = () => {
                         <>
                             <div style={{display: 'flex', justifyContent: "flex-start", alignItems: "center"}}>
                                 <Typography variant="h6">
-                                    You have {state.favourites_count} in favourites
+                                    You have {state.favourites.length} favourites
                                 </Typography>
                             </div>
-                            <GifList id="list" gifList={state.favourites} />
+                            <GifList id="list" gifList={state.favourites} handleRemoveItem={handleRemoveFromFavourites} />
                         </>
                     ) : (
                         <div style={{display: 'flex', justifyContent: "flex-start", alignItems: "center"}}>
