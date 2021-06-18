@@ -10,7 +10,6 @@ import {remove_gif_from_favourite, save_gif_to_favourite, save_search_options, s
 import CustomCircularProgress from "../../components/Shared/CustomCircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import ConfirmationDialog from "../../components/ConfirmationDialog";
 
 const GifSearch = () => {
     const classes = styles();
