@@ -1,6 +1,7 @@
 .App {
   flex-grow: 1;
   height: 100%;
+  width: "auto";
 }
 
 .App-header {
